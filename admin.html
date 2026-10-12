@@ -44,6 +44,15 @@
     textarea { resize: vertical; min-height: 148px; white-space: pre-wrap; }
     .token-field { grid-column: 1 / -1; }
     .hint { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+    .onboarding {
+      margin-top: 14px; padding: 13px; border: 1px solid #c8d8d7; border-radius: 7px;
+      background: #eef6f5; color: #314b4a; font-size: 13px;
+    }
+    .onboarding strong { display: block; margin-bottom: 6px; }
+    .onboarding ol { margin: 0; padding-left: 20px; }
+    .onboarding li + li { margin-top: 4px; }
+    .onboarding a { color: var(--green-dark); font-weight: 600; }
+    .onboarding p { margin: 8px 0 0; color: #596b6a; }
     button {
       min-height: 38px; padding: 9px 14px; border: 1px solid #c9d1cb; border-radius: 6px;
       background: #fff; color: #333; font: inherit; cursor: pointer;
@@ -123,7 +132,16 @@
           <input id="token" type="password" autocomplete="off" placeholder="github_pat_...">
         </div>
       </div>
-      <p class="hint">建议使用 Fine-grained token：只授权这个仓库，权限选 <strong>Contents: Read and write</strong> 和 <strong>Metadata: Read-only</strong>。好友永远不会看到这个后台和 Token。</p>
+      <div class="onboarding">
+        <strong>编辑方法</strong>
+        <ol>
+          <li>点这里 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">创建 GitHub Token</a>。</li>
+          <li>Token 页选择仓库 <code>zhenghuitian0913-create/renovation-list</code>，权限选 <strong>Contents: Read and write</strong> 和 <strong>Metadata: Read-only</strong>，生成后复制。</li>
+          <li>把 Token 粘贴到上面的 <strong>GitHub Token</strong> 输入框，点 <strong>加载内容</strong>。</li>
+          <li>下面会出现文字编辑框、图片/视频上传按钮和行管理按钮。改完点 <strong>保存并发布</strong>。</li>
+        </ol>
+        <p>Token 只保存在你自己这台设备的浏览器里。发布一般需要 20 秒到 2 分钟。</p>
+      </div>
       <div class="actions" style="margin-top:14px">
         <button id="loadButton" type="button" class="primary">加载内容</button>
         <button id="localButton" type="button">本地预览</button>

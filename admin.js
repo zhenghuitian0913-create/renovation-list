@@ -31,10 +31,16 @@
   let uploadTarget = null;
   const pendingFiles = new Map();
 
-  elements.owner.value = localStorage.getItem(`${STORAGE_KEY}:owner`) || "";
-  elements.repo.value = localStorage.getItem(`${STORAGE_KEY}:repo`) || "";
-  elements.branch.value = localStorage.getItem(`${STORAGE_KEY}:branch`) || "main";
-  elements.directory.value = localStorage.getItem(`${STORAGE_KEY}:directory`) || "";
+  const defaultConfig = {
+    owner: "zhenghuitian0913-create",
+    repo: "renovation-list",
+    branch: "main",
+    directory: ""
+  };
+  elements.owner.value = localStorage.getItem(`${STORAGE_KEY}:owner`) || defaultConfig.owner;
+  elements.repo.value = localStorage.getItem(`${STORAGE_KEY}:repo`) || defaultConfig.repo;
+  elements.branch.value = localStorage.getItem(`${STORAGE_KEY}:branch`) || defaultConfig.branch;
+  elements.directory.value = localStorage.getItem(`${STORAGE_KEY}:directory`) || defaultConfig.directory;
 
   function setStatus(message, type = "info") {
     elements.status.className = `status ${type}`;
