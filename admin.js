@@ -41,6 +41,7 @@
   elements.repo.value = localStorage.getItem(`${STORAGE_KEY}:repo`) || defaultConfig.repo;
   elements.branch.value = localStorage.getItem(`${STORAGE_KEY}:branch`) || defaultConfig.branch;
   elements.directory.value = localStorage.getItem(`${STORAGE_KEY}:directory`) || defaultConfig.directory;
+  elements.token.value = localStorage.getItem(`${STORAGE_KEY}:token`) || "";
 
   function setStatus(message, type = "info") {
     elements.status.className = `status ${type}`;
@@ -57,6 +58,7 @@
     localStorage.setItem(`${STORAGE_KEY}:repo`, elements.repo.value.trim());
     localStorage.setItem(`${STORAGE_KEY}:branch`, elements.branch.value.trim() || "main");
     localStorage.setItem(`${STORAGE_KEY}:directory`, elements.directory.value.trim());
+    localStorage.setItem(`${STORAGE_KEY}:token`, elements.token.value.trim());
   }
 
   function contentPath() {
