@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f1ea">
+  <title>装修需求清单</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f4f1ea;
+      --surface: #fffdf9;
+      --ink: #22252a;
+      --muted: #686d75;
+      --line: #ded7ca;
+      --teal: #276968;
+      --teal-dark: #1b4d4d;
+      --amber: #a85a24;
+      --shadow: 0 18px 45px rgba(34, 37, 42, .09);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(39,105,104,.08), transparent 320px),
+        var(--paper);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.62;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px min(5vw, 64px);
+      border-bottom: 1px solid rgba(222,215,202,.72);
+      background: rgba(244,241,234,.94);
+      backdrop-filter: blur(14px);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .brand-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(39,105,104,.14);
+    }
+    .page-links { display: flex; align-items: center; gap: 18px; color: var(--muted); font-size: 14px; }
+    .page-links a { color: inherit; text-decoration: none; }
+    .page-links a:hover { color: var(--teal-dark); }
+
+    main {
+      width: min(1280px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 80px;
+    }
+
+    .hero {
+      max-width: 860px;
+      margin: 0 auto 44px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 13px;
+      border: 1px solid #cfd4cd;
+      border-radius: 999px;
+      background: #e8efe9;
+      color: #3d5a44;
+      font-size: 13px;
+    }
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(30px, 6vw, 52px);
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      margin: 0 auto;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: clamp(15px, 2.6vw, 18px);
+      white-space: pre-line;
+    }
+    .update-time { margin-top: 18px; color: #97938a; font-size: 13px; }
+
+    .sections { display: grid; gap: 44px; }
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px clamp(16px, 3vw, 34px);
+      border-bottom: 1px solid var(--line);
+      background: #faf7f0;
+    }
+    .section-title {
+      margin: 0;
+      font-size: clamp(20px, 3.2vw, 28px);
+      line-height: 1.3;
+    }
+    .section-count {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th, td {
+      padding: 18px clamp(14px, 2vw, 24px);
+      border: 0;
+      border-right: 1px solid #ece5d8;
+      border-bottom: 1px solid #ece5d8;
+      vertical-align: top;
+      text-align: left;
+    }
+    th:last-child, td:last-child { border-right: 0; }
+    tr:last-child td { border-bottom: 0; }
+    th {
+      background: #f0ebe1;
+      color: #57534c;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    td { font-size: 15px; background: var(--surface); }
+    td:first-child { width: 13%; }
+    td:nth-child(2) { width: 18%; }
+    td:nth-child(3) { width: 34%; }
+    td:nth-child(4) { width: 26%; }
+    td:last-child { width: auto; }
+    .cell-text {
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+    .cell-text a { color: var(--teal-dark); font-weight: 500; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .asset-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .media-button {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #ddd5c7;
+      border-radius: 8px;
+      background: #eef1ee;
+      cursor: zoom-in;
+    }
+    .media-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .25s ease;
+    }
+    .media-button:hover img { transform: scale(1.03); }
+    video {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      display: block;
+      overflow: hidden;
+      border: 1px solid #ddd5c7;
+      border-radius: 8px;
+      background: #000;
+      object-fit: contain;
+    }
+
+    .empty-note {
+      padding: 64px 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .error-note {
+      margin: 20px auto 0;
+      max-width: 620px;
+      padding: 18px;
+      border: 1px solid #e2c7ba;
+      border-radius: 8px;
+      background: #fff3ef;
+      color: #7b3a20;
+    }
+
+    footer {
+      padding: 28px min(5vw, 64px) 42px;
+      color: #8d8a83;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+      background: rgba(17, 19, 21, .94);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-body {
+      position: relative;
+      max-width: min(1400px, 100%);
+      max-height: 100%;
+    }
+    .lightbox-image {
+      max-width: 100%;
+      max-height: calc(100vh - 104px);
+      display: block;
+      margin: 0 auto;
+      border-radius: 5px;
+    }
+    .lightbox-caption {
+      margin-top: 14px;
+      color: #e8e8e8;
+      text-align: center;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: max(16px, env(safe-area-inset-top));
+      right: max(16px, env(safe-area-inset-right));
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+      main { width: min(100%, calc(100% - 20px)); padding-top: 30px; }
+      .topbar { padding: 12px 18px; }
+      .page-links .admin-link { display: none; }
+      .section { border-radius: 8px; }
+      .asset-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-dot"></span><span>装修需求清单</span></div>
+    <nav class="page-links">
+      <a href="#content">查看内容</a>
+      <a class="admin-link" href="admin.html" target="_blank" rel="noopener">编辑后台</a>
+    </nav>
+  </header>
+
+  <main id="content">
+    <div class="hero">
+      <span class="eyebrow">装修需求 · 可随时更新</span>
+      <h1 id="pageTitle">正在加载需求清单</h1>
+      <p class="subtitle" id="pageSubtitle">请稍等。</p>
+      <div class="update-time" id="updateTime"></div>
+    </div>
+    <div id="app"><div class="empty-note">正在加载内容，图片较多时会稍微慢一点。</div></div>
+  </main>
+
+  <footer>公开查看页 · 图片可点击放大 · 链接可直接打开</footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片查看器">
+    <div class="lightbox-body">
+      <img class="lightbox-image" id="lightboxImage" alt="">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+    <button class="lightbox-close" id="lightboxClose" aria-label="关闭">&times;</button>
+  </div>
+
+  <script src="public.js?v=3"></script>
+</body>
+</html>

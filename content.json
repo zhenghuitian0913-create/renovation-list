@@ -1,0 +1,814 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-12T08:40:21.311Z",
+  "title": "旧房全屋翻新 · 装修需求清单",
+  "subtitle": "风格：中古风 | 原始户型：三房一厅 | 目标：三房两厅+工作间 | 含院子约20㎡",
+  "sections": [
+    {
+      "id": "section-1",
+      "title": "一、项目概况",
+      "headers": [
+        "板块",
+        "空间/项目",
+        "具体需求描述",
+        "参考图",
+        "备注 / 待确认"
+      ],
+      "rows": [
+        {
+          "id": "row-001",
+          "cells": [
+            {
+              "id": "cell-0001",
+              "html": "<div class=\"cell-text\">项目概况</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0002",
+              "html": "<div class=\"cell-text\">房屋类型</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0003",
+              "html": "<div class=\"cell-text\">旧房全屋翻新，近期动工</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0004",
+              "html": "&nbsp;",
+              "assets": []
+            },
+            {
+              "id": "cell-0005",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-002",
+          "cells": [
+            {
+              "id": "cell-0006",
+              "html": "<div class=\"cell-text\">居住人口</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0007",
+              "html": "<div class=\"cell-text\">5口人：夫妻 + 1名儿童（3岁半）+父母</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0008",
+              "html": "&nbsp;",
+              "assets": []
+            },
+            {
+              "id": "cell-0009",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-003",
+          "cells": [
+            {
+              "id": "cell-0010",
+              "html": "<div class=\"cell-text\">整体风格</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0011",
+              "html": "<div class=\"cell-text\">中古风（参考附图1-3）</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0012",
+              "html": "&nbsp;",
+              "assets": []
+            },
+            {
+              "id": "cell-0013",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-004",
+          "cells": [
+            {
+              "id": "cell-0014",
+              "html": "<div class=\"cell-text\">原始户型</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0015",
+              "html": "<div class=\"cell-text\">三房一厅（仅一个客厅24.9㎡），1楼带院子约20㎡</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0016",
+              "html": "",
+              "assets": [
+                {
+                  "id": "asset-001",
+                  "type": "image",
+                  "src": "assets/001-88.jpg",
+                  "name": "88.JPG"
+                }
+              ]
+            },
+            {
+              "id": "cell-0017",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-005",
+          "cells": [
+            {
+              "id": "cell-0018",
+              "html": "<div class=\"cell-text\">改造目标</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0019",
+              "html": "<div class=\"cell-text\">1、中古风，三房两厅（客餐厅分离）两卫+工作室，院子做小水池\n2、整体动线顺畅，多多的储物空间\n3、全屋智能家居系统\n4、中央空调和地暖\n5、储物需求请设计师规划</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0020",
+              "html": "",
+              "assets": [
+                {
+                  "id": "asset-002",
+                  "type": "image",
+                  "src": "assets/002-66.jpg",
+                  "name": "66.JPG"
+                },
+                {
+                  "id": "asset-003",
+                  "type": "image",
+                  "src": "assets/003-img-1527.jpg",
+                  "name": "IMG_1527.JPG"
+                },
+                {
+                  "id": "asset-004",
+                  "type": "image",
+                  "src": "assets/004-img-1580.jpg",
+                  "name": "IMG_1580.PNG"
+                },
+                {
+                  "id": "asset-005",
+                  "type": "image",
+                  "src": "assets/005-img-1582.jpg",
+                  "name": "IMG_1582.PNG"
+                },
+                {
+                  "id": "asset-006",
+                  "type": "image",
+                  "src": "assets/006-img-1594.jpg",
+                  "name": "IMG_1594.JPG"
+                }
+              ]
+            },
+            {
+              "id": "cell-0021",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-2",
+      "title": "二、原始户型面积明细（参考原始户型图）",
+      "headers": [
+        "板块",
+        "空间/项目",
+        "各空间详细需求描述",
+        "",
+        "备注 / 待确认"
+      ],
+      "rows": [
+        {
+          "id": "row-006",
+          "cells": [
+            {
+              "id": "cell-0022",
+              "html": "<div class=\"cell-text\">卧室A</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0023",
+              "html": "<div class=\"cell-text\">北卧（12.6㎡）→厨房餐厅</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0024",
+              "html": "<div class=\"cell-text\">把客厅的墙打掉，改为厨房和餐厅，想要南北通透，整体动线顺畅\n1、厨房和餐厅之间想做个小吧台（岛台），设计师根据具体情况而定\n2、做零食柜、小酒柜、喝水喝酒喝吧台等（家里有咖啡机，但不常用）\n3、预留洗碗机、烤箱等家电位置</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0025",
+              "html": "",
+              "assets": [
+                {
+                  "id": "asset-007",
+                  "type": "image",
+                  "src": "assets/007-img-1539.jpg",
+                  "name": "IMG_1539.PNG"
+                },
+                {
+                  "id": "asset-008",
+                  "type": "image",
+                  "src": "assets/008-img-1540.jpg",
+                  "name": "IMG_1540.PNG"
+                },
+                {
+                  "id": "asset-009",
+                  "type": "image",
+                  "src": "assets/009-img-1541.jpg",
+                  "name": "IMG_1541.PNG"
+                },
+                {
+                  "id": "asset-010",
+                  "type": "image",
+                  "src": "assets/010-img-1542.jpg",
+                  "name": "IMG_1542.PNG"
+                },
+                {
+                  "id": "asset-011",
+                  "type": "image",
+                  "src": "assets/011-img-1543.jpg",
+                  "name": "IMG_1543.PNG"
+                },
+                {
+                  "id": "asset-012",
+                  "type": "image",
+                  "src": "assets/012-img-1544.jpg",
+                  "name": "IMG_1544.PNG"
+                },
+                {
+                  "id": "asset-013",
+                  "type": "image",
+                  "src": "assets/013-img-1545.jpg",
+                  "name": "IMG_1545.PNG"
+                },
+                {
+                  "id": "asset-014",
+                  "type": "image",
+                  "src": "assets/014-img-1546.jpg",
+                  "name": "IMG_1546.PNG"
+                }
+              ]
+            },
+            {
+              "id": "cell-0026",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-007",
+          "cells": [
+            {
+              "id": "cell-0027",
+              "html": "<div class=\"cell-text\">卧室B</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0028",
+              "html": "<div class=\"cell-text\">东卧（最大 17.3㎡）→主卧</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0029",
+              "html": "<div class=\"cell-text\">主卧，做独立卫生间，和衣帽间，梳妆台，和工作室，整体动线合理\n1、靠近卫生间和衣帽间的地方做梳妆台，梳妆台旁要有小小的洗漱台，要有多多的柜子做储物放置化妆品护肤品等\n2、主卧窗户改成落地可进出的门，连通房外院子的小房间，改为工作室（直播间）\n3、工作室（直播间）需求：桌子至少并排坐3个人，或者准备两个独立的桌子，要能装下两个专业摄影补光灯、背景高级质感</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0030",
+              "html": "<div class=\"cell-text\">十几万人催更🔥我家浴室柜火了😱附图纸❗️ <a href=\"https://xhslink.cn/o/41PfbdrixZI\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/41PfbdrixZI</a> 存下口令，来【小红书】瞧瞧这篇~</div>",
+              "assets": [
+                {
+                  "id": "asset-015",
+                  "type": "image",
+                  "src": "assets/015-img-1548.jpg",
+                  "name": "IMG_1548.JPG"
+                },
+                {
+                  "id": "asset-016",
+                  "type": "image",
+                  "src": "assets/016-img-1550.jpg",
+                  "name": "IMG_1550.PNG"
+                },
+                {
+                  "id": "asset-017",
+                  "type": "image",
+                  "src": "assets/017-img-1553.jpg",
+                  "name": "IMG_1553.JPG"
+                },
+                {
+                  "id": "asset-018",
+                  "type": "image",
+                  "src": "assets/018-img-1554.jpg",
+                  "name": "IMG_1554.JPG"
+                },
+                {
+                  "id": "asset-019",
+                  "type": "image",
+                  "src": "assets/019-img-1555.jpg",
+                  "name": "IMG_1555.JPG"
+                },
+                {
+                  "id": "asset-020",
+                  "type": "image",
+                  "src": "assets/020-img-1556.jpg",
+                  "name": "IMG_1556.JPG"
+                },
+                {
+                  "id": "asset-021",
+                  "type": "image",
+                  "src": "assets/021-img-1557.jpg",
+                  "name": "IMG_1557.JPG"
+                }
+              ]
+            },
+            {
+              "id": "cell-0031",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-008",
+          "cells": [
+            {
+              "id": "cell-0032",
+              "html": "<div class=\"cell-text\">卧室C</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0033",
+              "html": "<div class=\"cell-text\">西南卧（10.5㎡）→老人房/客房</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0034",
+              "html": "<div class=\"cell-text\">老人房，老人有时会带孩子一起睡，床最好大点，靠墙安全点\n1、父母，特别是婆婆会跟着我们住到孩子上完小学\n2、公公偶尔来住，最好是能让他在房间里 不出去就住的特别舒服，公公爱看电视，需要配电视机</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0035",
+              "html": "",
+              "assets": [
+                {
+                  "id": "asset-022",
+                  "type": "image",
+                  "src": "assets/022-img-1560-3.jpg",
+                  "name": "IMG_1560 3.JPG"
+                },
+                {
+                  "id": "asset-023",
+                  "type": "image",
+                  "src": "assets/023-img-1604.jpg",
+                  "name": "IMG_1604.PNG"
+                },
+                {
+                  "id": "asset-024",
+                  "type": "image",
+                  "src": "assets/024-img-1605.jpg",
+                  "name": "IMG_1605.PNG"
+                },
+                {
+                  "id": "asset-025",
+                  "type": "image",
+                  "src": "assets/025-img-1608.jpg",
+                  "name": "IMG_1608.PNG"
+                }
+              ]
+            },
+            {
+              "id": "cell-0036",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-009",
+          "cells": [
+            {
+              "id": "cell-0037",
+              "html": "<div class=\"cell-text\">客厅</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0038",
+              "html": "<div class=\"cell-text\">原唯一厅（24.9㎡）→客厅</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0039",
+              "html": "<div class=\"cell-text\">客厅去客厅化\n1、想做一整面墙的书架（满墙书柜），要休闲娱乐活动空间充足\n2、电视做可移动的\n3、不要茶几，要有沙发\n4、女主人喜欢听音乐，可以弄个小音响\n5、能和孩子一起打游戏，健身活动</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0040",
+              "html": "",
+              "assets": [
+                {
+                  "id": "asset-026",
+                  "type": "image",
+                  "src": "assets/026-img-1570.jpg",
+                  "name": "IMG_1570.JPG"
+                },
+                {
+                  "id": "asset-027",
+                  "type": "image",
+                  "src": "assets/027-img-1571.jpg",
+                  "name": "IMG_1571.PNG"
+                },
+                {
+                  "id": "asset-028",
+                  "type": "image",
+                  "src": "assets/028-img-1572.jpg",
+                  "name": "IMG_1572.PNG"
+                },
+                {
+                  "id": "asset-029",
+                  "type": "image",
+                  "src": "assets/029-img-1575.jpg",
+                  "name": "IMG_1575.JPG"
+                },
+                {
+                  "id": "asset-030",
+                  "type": "image",
+                  "src": "assets/030-img-1576.jpg",
+                  "name": "IMG_1576.JPG"
+                },
+                {
+                  "id": "asset-031",
+                  "type": "image",
+                  "src": "assets/031-img-1578.jpg",
+                  "name": "IMG_1578.JPG"
+                },
+                {
+                  "id": "asset-032",
+                  "type": "image",
+                  "src": "assets/032-img-1583.jpg",
+                  "name": "IMG_1583.PNG"
+                },
+                {
+                  "id": "asset-033",
+                  "type": "image",
+                  "src": "assets/033-img-1584.jpg",
+                  "name": "IMG_1584.PNG"
+                }
+              ]
+            },
+            {
+              "id": "cell-0041",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-010",
+          "cells": [
+            {
+              "id": "cell-0042",
+              "html": "<div class=\"cell-text\">厨房</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0043",
+              "html": "<div class=\"cell-text\">北厨（6.0㎡）→儿童房</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0044",
+              "html": "<div class=\"cell-text\">儿童房设计规划的要能适合孩子从幼儿园到初中的阶段\n1、儿童房面积较小，采用上床下空设计：床在上面，下面做活动区，和书桌\n2、墙面想装攀爬架/攀岩墙，给孩子活动用\n3、玩具储物空间、黑板/白板写写画画\n\n备注：厨房面积太小，根据设计情况也可以和老人房做调换</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0045",
+              "html": "<div class=\"cell-text\">适我的家居住提案🧸孩子眼中的家Roomtour 👀不到15㎡... <a href=\"https://xhslink.cn/o/8IDrU5UOmaA\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/8IDrU5UOmaA</a>保留这段，去【小红书】瞧瞧笔记~\n\n9m²的儿童房做树屋，能做5大功能区❗ 空间不大的儿童... <a href=\"https://xhslink.cn/o/2IA380o2514\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/2IA380o2514</a> \n把这段话复制下来，打开【小红书】查看。\n\n7㎡树屋儿童房，住到18岁也没问题 房价这么贵，每平米... <a href=\"https://xhslink.cn/o/2RyCut59UkO\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/2RyCut59UkO</a> \n把口令拷走，打开【小红书】查看详情~\n\n9平米成长型儿童房这样做多4平，附尺寸 上一篇被很多... <a href=\"https://xhslink.cn/o/1q2TLxgd5Bf\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/1q2TLxgd5Bf</a> \n把这段复制下来，打开【小红书】就能看到精彩笔记。</div>",
+              "assets": [
+                {
+                  "id": "asset-034",
+                  "type": "image",
+                  "src": "assets/034-img-1592.jpg",
+                  "name": "IMG_1592.JPG"
+                }
+              ]
+            },
+            {
+              "id": "cell-0046",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-011",
+          "cells": [
+            {
+              "id": "cell-0047",
+              "html": "<div class=\"cell-text\">卫生间</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0048",
+              "html": "<div class=\"cell-text\">公卫（5.5㎡）</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0049",
+              "html": "<div class=\"cell-text\">干湿分离请设计师建议\n1、其中一个卫生间，根据空间情况做个浴缸或者浴池\n2、浴缸和淋浴要分开</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0050",
+              "html": "<div class=\"cell-text\">日式三分离拿捏3-6㎡卫生间，洒洒水啦~ 卫生间小到崩... <a href=\"https://xhslink.cn/o/6q0SmWW8FHP\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/6q0SmWW8FHP</a>先复制再打开【小红书】，笔记内容马上呈现。\n\n三分离卫生间设计｜小户型也能做出高级感 小户型卫生... <a href=\"https://xhslink.cn/o/UwjoMB3nBt\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/UwjoMB3nBt</a> \n跳转【小红书】看看这篇分享！</div>",
+              "assets": [
+                {
+                  "id": "asset-035",
+                  "type": "image",
+                  "src": "assets/035-img-1590.jpg",
+                  "name": "IMG_1590.JPG"
+                },
+                {
+                  "id": "asset-036",
+                  "type": "image",
+                  "src": "assets/036-img-1593.jpg",
+                  "name": "IMG_1593.JPG"
+                }
+              ]
+            },
+            {
+              "id": "cell-0051",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-012",
+          "cells": [
+            {
+              "id": "cell-0052",
+              "html": "<div class=\"cell-text\">储物间</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0053",
+              "html": "<div class=\"cell-text\">小储物（1.8㎡）</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0054",
+              "html": "<div class=\"cell-text\">请设计师规划</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0055",
+              "html": "&nbsp;",
+              "assets": []
+            },
+            {
+              "id": "cell-0056",
+              "html": "<div class=\"cell-text\">利用方式待定</div>",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-013",
+          "cells": [
+            {
+              "id": "cell-0057",
+              "html": "<div class=\"cell-text\">阳台</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0058",
+              "html": "<div class=\"cell-text\">南阳台（4.6㎡）</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0059",
+              "html": "<div class=\"cell-text\">做茶室、开放办公学习区\n1、饭后和孩子一起学习看书工作的地方\n2、能看到院子的景观</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0060",
+              "html": "",
+              "assets": [
+                {
+                  "id": "asset-037",
+                  "type": "image",
+                  "src": "assets/037-img-1595.jpg",
+                  "name": "IMG_1595.PNG"
+                },
+                {
+                  "id": "asset-038",
+                  "type": "video",
+                  "src": "assets/038-screenrecording-10-08-2026-19-35-19-1.mp4",
+                  "name": "ScreenRecording_10-08-2026 19-35-19_1.MP4"
+                }
+              ]
+            },
+            {
+              "id": "cell-0061",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-014",
+          "cells": [
+            {
+              "id": "cell-0062",
+              "html": "<div class=\"cell-text\">院子</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0063",
+              "html": "<div class=\"cell-text\">户外约20㎡</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0064",
+              "html": "<div class=\"cell-text\">院子要有工作间、休闲活动区、洗衣房、小鱼池，养花养草区\n\n1、想做一个生态小鱼池，龟鱼同养，鱼池位置、形状、大小、植物搭配请设计师出方案\n2、院子里预留出户外休闲活动区，男主人想安排一台跑步机\n3、工作间和主卧打通\n4、洗衣区安排呲水枪、工具收纳区\n\n现场量房后细化</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0065",
+              "html": "<div class=\"cell-text\">不到 20㎡天井丨改造全过程太治愈 <a href=\"https://xhslink.cn/o/3MeraesVp6L\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/3MeraesVp6L</a> 保留口令，直达【小红书】围观~\n\n一楼带院雨棚改造，入住2年最不后悔的决定！ 入住一楼... <a href=\"https://xhslink.cn/o/2dAVGwHT9fT\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/2dAVGwHT9fT</a> \n直达【小红书】探索笔记全文~\n\n不到40平的小花园这样装真的很治愈啊！ - 我家不到40... <a href=\"https://xhslink.cn/o/2keay134U07\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/2keay134U07</a> \n把这段复制好，然后去【小红书】就能看笔记。\n\n\n谁能拒绝小院里的烤肉火锅+橘猫啊🐱 冬天最幸福的事，... <a href=\"https://xhslink.cn/o/4go16NXzae\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/4go16NXzae</a> \n来【小红书】发现这篇笔记的精彩~\n\n🐠鱼池做好3个月啦！状态依然很棒 还是建议不要养龟🐢... <a href=\"https://xhslink.cn/o/1etK6BTpYAT\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/1etK6BTpYAT</a> \n存下口令，来【小红书】瞧瞧这篇~</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0066",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-3",
+      "title": "三、风格参考（中古风）",
+      "headers": [
+        "板块",
+        "空间/项目",
+        "具体需求描述",
+        "",
+        "备注 / 待确认"
+      ],
+      "rows": [
+        {
+          "id": "row-015",
+          "cells": [
+            {
+              "id": "cell-0067",
+              "html": "<div class=\"cell-text\">风格关键词</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0068",
+              "html": "<div class=\"cell-text\">材质色调</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0069",
+              "html": "<div class=\"cell-text\">胡桃木色/深棕木饰面、藤编柜门、人字拼木地板、米白/暖灰墙面</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0070",
+              "html": "<div class=\"cell-text\">请设计师建议</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0071",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-016",
+          "cells": [
+            {
+              "id": "cell-0072",
+              "html": "<div class=\"cell-text\">风格关键词</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0073",
+              "html": "<div class=\"cell-text\">灯光</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0074",
+              "html": "<div class=\"cell-text\">暖色调：嵌入式射灯 + 吊顶灯带 + 落地灯/台灯氛围灯</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0075",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-017",
+          "cells": [
+            {
+              "id": "cell-0076",
+              "html": "<div class=\"cell-text\">风格关键词</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0077",
+              "html": "<div class=\"cell-text\">元素</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0078",
+              "html": "&nbsp;",
+              "assets": []
+            },
+            {
+              "id": "cell-0079",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-018",
+          "cells": [
+            {
+              "id": "cell-0080",
+              "html": "<div class=\"cell-text\">参考案例</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0081",
+              "html": "&nbsp;",
+              "assets": []
+            },
+            {
+              "id": "cell-0082",
+              "html": "&nbsp;",
+              "assets": []
+            },
+            {
+              "id": "cell-0083",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        },
+        {
+          "id": "row-019",
+          "cells": [
+            {
+              "id": "cell-0084",
+              "html": "<div class=\"cell-text\">参考案例</div>",
+              "assets": []
+            },
+            {
+              "id": "cell-0085",
+              "html": "&nbsp;",
+              "assets": []
+            },
+            {
+              "id": "cell-0086",
+              "html": "&nbsp;",
+              "assets": []
+            },
+            {
+              "id": "cell-0087",
+              "html": "&nbsp;",
+              "assets": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

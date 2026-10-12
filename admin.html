@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>装修清单编辑后台</title>
+  <style>
+    :root {
+      --bg: #f2f4f2;
+      --surface: #fff;
+      --ink: #1f2428;
+      --muted: #626970;
+      --line: #d8ded9;
+      --green: #276968;
+      --green-dark: #174c4c;
+      --red: #a2372c;
+      --amber: #a86224;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 15px clamp(16px, 4vw, 36px);
+      background: #fff; border-bottom: 1px solid var(--line);
+    }
+    h1 { margin: 0; font-size: 19px; }
+    header small { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
+    .actions { display: flex; align-items: center; gap: 8px; }
+    .button-link {
+      display: inline-flex; align-items: center; min-height: 38px; padding: 9px 14px;
+      border: 1px solid #c9d1cb; border-radius: 6px; background: #fff; color: #333;
+      text-decoration: none;
+    }
+    .button-link:hover { border-color: #a9b5ae; background: #f7f9f7; }
+    main { width: min(1260px, calc(100% - 28px)); margin: 24px auto 80px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 9px; padding: 18px; box-shadow: 0 10px 26px rgba(31,36,40,.06); }
+    .connect-card { margin-bottom: 18px; }
+    .form-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+    .field label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 13px; }
+    input, textarea, select { width: 100%; min-width: 0; border: 1px solid #cfd6d0; border-radius: 6px; background: #fbfcfb; color: var(--ink); padding: 10px; font: inherit; }
+    input:focus, textarea:focus, select:focus { outline: 2px solid rgba(39,105,104,.22); border-color: #8db1b0; }
+    textarea { resize: vertical; min-height: 148px; white-space: pre-wrap; }
+    .token-field { grid-column: 1 / -1; }
+    .hint { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+    button {
+      min-height: 38px; padding: 9px 14px; border: 1px solid #c9d1cb; border-radius: 6px;
+      background: #fff; color: #333; font: inherit; cursor: pointer;
+    }
+    button:hover:not(:disabled) { border-color: #a9b5ae; background: #f7f9f7; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .primary { background: var(--green); border-color: var(--green); color: #fff; }
+    .primary:hover:not(:disabled) { background: var(--green-dark); border-color: var(--green-dark); }
+    .danger { color: var(--red); border-color: #d8bab5; }
+    .danger:hover:not(:disabled) { background: #fff4f2; }
+    .mini { min-height: 30px; padding: 4px 8px; font-size: 12px; }
+    .status { margin-top: 12px; padding: 10px 12px; border-radius: 6px; display: none; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .status.ok { display: block; color: #255739; background: #ecf6ee; border: 1px solid #bedcc4; }
+    .status.error { display: block; color: #822d24; background: #fff1ef; border: 1px solid #e2c1bb; }
+    .status.info { display: block; color: #5a431f; background: #fff6e8; border: 1px solid #ecd4b0; }
+    .progress { margin-top: 12px; display: none; }
+    .progress.on { display: block; }
+    .progress-bar { height: 7px; overflow: hidden; background: #dde3dd; border-radius: 999px; }
+    .progress-bar span { display: block; width: 0; height: 100%; background: var(--green); transition: width .25s ease; }
+    .editor { margin-top: 18px; display: none; }
+    .editor.on { display: block; }
+    .toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+    .section { margin-top: 22px; }
+    .section-box { border-top: 2px solid #b9c7c6; padding-top: 14px; }
+    .section-head { display: flex; gap: 10px; align-items: center; }
+    .section-head input { font-size: 17px; font-weight: 700; }
+    .row-card { margin-top: 14px; padding: 14px; border: 1px solid #dfe5df; border-radius: 8px; background: #fafcfa; }
+    .row-tools { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; color: var(--muted); font-size: 13px; }
+    .cells { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+    .cell-box { border: 1px solid #dbe1db; border-radius: 7px; padding: 10px; background: #fff; }
+    .cell-label { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px; color: var(--muted); font-size: 12px; }
+    .cell-box textarea { min-height: 190px; font-size: 14px; }
+    .media-tools { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+    .asset-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin-top: 8px; }
+    .asset-card { border: 1px solid #d8dfd8; border-radius: 6px; padding: 6px; background: #fbfcfb; }
+    .asset-preview { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 4px; background: #e7eae7; display: block; }
+    video.asset-preview { object-fit: contain; background: #000; }
+    .asset-name { margin: 5px 0; color: var(--muted); font-size: 11px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+    .asset-actions { display: flex; gap: 5px; }
+    .pending { outline: 2px solid var(--amber); outline-offset: 1px; }
+    .add-row { width: 100%; margin-top: 12px; }
+    .save-bar {
+      position: sticky; bottom: 0; z-index: 8; margin-top: 18px; padding: 13px;
+      background: rgba(255,255,255,.95); border: 1px solid var(--line); border-radius: 8px;
+      display: flex; gap: 10px; align-items: center; justify-content: space-between; backdrop-filter: blur(10px);
+    }
+    .dirty-note { color: var(--muted); font-size: 13px; }
+    footer { text-align: center; color: #7b827c; font-size: 12px; padding: 0 20px 40px; }
+    footer a { color: var(--green-dark); }
+    @media (max-width: 900px) { .form-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 620px) {
+      main { width: min(100%, calc(100% - 18px)); }
+      header { align-items: flex-start; flex-direction: column; }
+      .form-grid { grid-template-columns: 1fr; }
+      .cells, .asset-grid { grid-template-columns: 1fr; }
+      .save-bar { align-items: stretch; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>装修清单编辑后台<small>改动保存后，公开网页会自动更新</small></h1>
+    <div class="actions">
+      <a class="button-link" href="index.html" target="_blank" rel="noopener">打开公开页</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="card connect-card">
+      <div class="form-grid">
+        <div class="field"><label for="owner">GitHub 用户名 / 组织</label><input id="owner" autocomplete="off" placeholder="your-github-name"></div>
+        <div class="field"><label for="repo">仓库名</label><input id="repo" autocomplete="off" placeholder="renovation-list"></div>
+        <div class="field"><label for="branch">分支</label><input id="branch" value="main"></div>
+        <div class="field"><label for="directory">仓库目录（一般留空）</label><input id="directory" placeholder="留空"></div>
+        <div class="field token-field">
+          <label for="token">GitHub Token（只保存在本机浏览器）</label>
+          <input id="token" type="password" autocomplete="off" placeholder="github_pat_...">
+        </div>
+      </div>
+      <p class="hint">建议使用 Fine-grained token：只授权这个仓库，权限选 <strong>Contents: Read and write</strong> 和 <strong>Metadata: Read-only</strong>。好友永远不会看到这个后台和 Token。</p>
+      <div class="actions" style="margin-top:14px">
+        <button id="loadButton" type="button" class="primary">加载内容</button>
+        <button id="localButton" type="button">本地预览</button>
+        <button id="saveButton" type="button" class="primary" disabled>保存并发布</button>
+      </div>
+      <div class="progress" id="progress"><div class="progress-bar"><span id="progressBar"></span></div></div>
+      <div class="status" id="status"></div>
+    </section>
+
+    <section class="editor" id="editor">
+      <div class="card">
+        <div class="toolbar">
+          <strong>页面信息</strong>
+          <button id="resetButton" type="button">放弃未保存改动</button>
+        </div>
+        <div class="form-grid" style="grid-template-columns:1fr">
+          <div class="field"><label for="title">标题</label><input id="title"></div>
+          <div class="field"><label for="subtitle">副标题</label><textarea id="subtitle" style="min-height:84px"></textarea></div>
+        </div>
+      </div>
+      <div id="sections"></div>
+      <div class="save-bar">
+        <span class="dirty-note" id="dirtyNote">已加载；还没有修改。</span>
+        <span class="actions"><button id="bottomSaveButton" type="button" class="primary" disabled>保存并发布</button></span>
+      </div>
+    </section>
+  </main>
+
+  <footer>本后台仅给主人编辑使用；好友只需打开公开页。 <a href="部署说明.md" target="_blank" rel="noopener">查看部署说明</a></footer>
+
+  <input type="file" id="fileInput" accept="image/*,video/*" style="display:none">
+  <script src="admin.js?v=1"></script>
+</body>
+</html>
