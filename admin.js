@@ -74,7 +74,8 @@
   }
 
   async function request(url, options = {}) {
-    const response = await fetch(url, { ...options, headers: { ...apiHeaders(), ...(options.headers || {}) } });
+    const target = /^https?:/i.test(url) ? url : `https://api.github.com${url}`;
+    const response = await fetch(target, { ...options, headers: { ...apiHeaders(), ...(options.headers || {}) } });
     const text = await response.text();
     let payload = null;
     try { payload = text ? JSON.parse(text) : null; } catch (_) { payload = { message: text }; }
