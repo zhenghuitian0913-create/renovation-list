@@ -138,8 +138,8 @@
 
   function markDirty(state = true) {
     dirty = state;
-    elements.saveButton.disabled = !state;
-    elements.bottomSaveButton.disabled = !state;
+    elements.saveButton.disabled = false;
+    elements.bottomSaveButton.disabled = false;
     elements.dirtyNote.textContent = state ? "有未保存的修改；点击“保存并发布”后才会更新公开页。" : "已保存，和线上内容一致。";
   }
 
@@ -587,6 +587,10 @@
 
   async function saveToGithub() {
     if (!content) return;
+    if (!dirty) {
+      setStatus("没有检测到新修改。请先在表格里修改文字、添加图片，或调整行列后再保存。", "info");
+      return;
+    }
     const owner = elements.owner.value.trim();
     const repo = elements.repo.value.trim();
     const branch = elements.branch.value.trim() || "main";
