@@ -660,16 +660,48 @@
     elements.loadButton.disabled = true;
     setStatus("正在加载线上内容…", "info");
     try {
-      const result = await request(`/repos/${owner}/${repo}/contents/${encodeURIComponent(contentPath()).replace(/%2F/g, "/")}?ref=${encodeURIComponent(branch)}`);
-      const decoded = decodeBase64(result.content || "");
+      let decoded = "";
+      let usedApi = false;
+      if (elements.token.value.trim()) {
+        try {
+          const result = await request(`/repos/${owner}/${repo}/contents/${encodeURIComponent(contentPath()).replace(/%2F/g, "/")}?ref=${encodeURIComponent(branch)}`);
+          decoded = decodeBase64(result.content || "");
+          contentSha = result.sha || "";
+          usedApi = true;
+        } catch (_) {
+          contentSha = "";
+        }
+      }
+      if (!usedApi) {
+        contentSha = "";
+        const path = contentPath();
+        const candidates = [];
+        if (/^https?:$/i.test(window.location.protocol)) {
+          candidates.push(`${path}?t=${Date.now()}`);
+        }
+        const encodedPath = path.split("/").map(encodeURIComponent).join("/");
+        candidates.push(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${encodedPath}?t=${Date.now()}`);
+        let lastError = null;
+        decoded = "";
+        for (const candidate of candidates) {
+          try {
+            const response = await fetch(candidate, { cache: "no-store" });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            decoded = await response.text();
+            break;
+          } catch (error) {
+            lastError = error;
+          }
+        }
+        if (!decoded) throw lastError || new Error("找不到线上内容");
+      }
       content = normalizeContent(JSON.parse(decoded));
       savedContent = JSON.parse(JSON.stringify(content));
-      contentSha = result.sha || "";
       pendingFiles.clear();
       elements.editor.classList.add("on");
       setEditorValues();
       markDirty(false);
-      setStatus("已加载线上内容。", "ok");
+      setStatus(usedApi ? "已加载线上内容。" : "已加载线上内容。未填 Token 也可以编辑；保存发布前需要填 Token。", "ok");
     } catch (error) {
       console.error(error);
       setStatus(`加载失败：${error.message}`, "error");
