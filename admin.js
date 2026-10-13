@@ -153,6 +153,100 @@
     renderSections();
   }
 
+  function escapeHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function decodeCellHtml(raw) {
+    const html = String(raw || "").trim();
+    if (!html || html === "&nbsp;") return "";
+    const template = document.createElement("template");
+    template.innerHTML = html;
+    template.content.querySelectorAll("script, style, iframe, object, embed").forEach((node) => node.remove());
+
+    const blockTags = ["DIV", "P", "LI", "UL", "OL", "SECTION", "ARTICLE", "H1", "H2", "H3", "H4", "H5", "H6"];
+    function walk(node) {
+      let text = "";
+      for (const child of node.childNodes) {
+        if (child.nodeType === Node.TEXT_NODE) {
+          text += child.nodeValue.replace(/\u00a0/g, " ");
+          continue;
+        }
+        if (child.nodeType !== Node.ELEMENT_NODE) continue;
+        if (child.tagName === "BR") {
+          text += "\n";
+          continue;
+        }
+        if (child.tagName === "A") {
+          const href = child.getAttribute("href") || "";
+          const label = child.textContent.replace(/\s+/g, " ").trim();
+          const same = label.replace(/\/$/, "") === href.replace(/\/$/, "");
+          text += same ? href : `${label} (${href})`;
+          continue;
+        }
+        if (blockTags.includes(child.tagName) && text && !text.endsWith("\n")) text += "\n";
+        text += walk(child);
+        if (blockTags.includes(child.tagName) && !text.endsWith("\n")) text += "\n";
+      }
+      return text;
+    }
+
+    return walk(template.content).replace(/\r\n?/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+  }
+
+  function createLink(label, href) {
+    return `<a href="${escapeHtml(encodeURI(href))}" target="_blank" rel="noopener noreferrer">${escapeHtml(label || href)}</a>`;
+  }
+
+  function encodeTextLine(line) {
+    const text = String(line || "").trim();
+    if (!text) return "";
+    const labelled = text.match(/^(.+?)\s*[（(]\s*(https?:\/\/[^\s<>]+?)\s*[)）]\s*$/u);
+    if (labelled) return createLink(labelled[1], labelled[2]);
+
+    let result = "";
+    let lastIndex = 0;
+    for (const match of text.matchAll(/https?:\/\/[^\s<>]+/gu)) {
+      result += escapeHtml(text.slice(lastIndex, match.index));
+      result += createLink(match[0], match[0]);
+      lastIndex = match.index + match[0].length;
+    }
+    result += escapeHtml(text.slice(lastIndex));
+    return result;
+  }
+
+  function encodeCellText(raw) {
+    const text = String(raw || "").replace(/\r\n?/g, "\n");
+    if (!text.trim()) return "&nbsp;";
+    const lines = text.split("\n").map((line) => encodeTextLine(line));
+    if (!lines.some((line) => line.trim())) return "&nbsp;";
+    return `<div class="cell-text">${lines.join("<br>")}</div>`;
+  }
+
+  function getSectionHeaders(section) {
+    const headers = Array.isArray(section.headers) ? section.headers : [];
+    return headers.length ? headers : ["内容", "参考图 / 链接"];
+  }
+
+  function insertRow(section, afterIndex = section.rows.length - 1) {
+    const headers = getSectionHeaders(section);
+    section.rows.splice(afterIndex + 1, 0, {
+      id: `row-${Date.now()}`,
+      cells: Array.from({ length: headers.length }, (_, index) => ({
+        id: `cell-${Date.now()}-${index}`,
+        html: "&nbsp;",
+        assets: []
+      }))
+    });
+    markDirty();
+    renderSections();
+  }
+
   function renderSections() {
     elements.sections.replaceChildren();
     content.sections.forEach((section, sectionIndex) => {
@@ -169,59 +263,159 @@
         section.title = sectionTitle.value;
         markDirty();
       });
-      sectionHead.appendChild(sectionTitle);
+      const deleteSection = document.createElement("button");
+      deleteSection.type = "button";
+      deleteSection.className = "mini danger";
+      deleteSection.textContent = "删除本节";
+      deleteSection.addEventListener("click", () => {
+        if (!window.confirm(`确定删除“${section.title || "这一节"}”整张表吗？里面的文字和参考图都会删除。`)) return;
+        content.sections.splice(sectionIndex, 1);
+        markDirty();
+        renderSections();
+      });
+      sectionHead.append(sectionTitle, deleteSection);
 
+      const headersEditor = document.createElement("details");
+      headersEditor.className = "headers-editor";
+      const summary = document.createElement("summary");
+      summary.textContent = "修改表头 / 增删列";
       const headersBox = document.createElement("div");
       headersBox.className = "form-grid";
-      headersBox.style.marginTop = "10px";
-      (section.headers.length ? section.headers : ["", "", "", ""]).forEach((header, headerIndex) => {
+      const headers = getSectionHeaders(section);
+      headers.forEach((header, headerIndex) => {
         const field = document.createElement("div");
         field.className = "field";
         const label = document.createElement("label");
-        label.textContent = `表头 ${headerIndex + 1}`;
+        label.textContent = `第 ${headerIndex + 1} 列`;
         const input = document.createElement("input");
         input.value = header || "";
         input.addEventListener("input", () => {
           section.headers[headerIndex] = input.value;
           markDirty();
         });
-        field.append(label, input);
+        const actions = document.createElement("div");
+        actions.style.display = "flex";
+        actions.style.marginTop = "6px";
+        const removeHeader = document.createElement("button");
+        removeHeader.type = "button";
+        removeHeader.className = "mini danger";
+        removeHeader.textContent = "删除列";
+        removeHeader.disabled = headers.length <= 1;
+        removeHeader.addEventListener("click", () => {
+          if (!window.confirm(`确定删除第 ${headerIndex + 1} 列吗？这一列里的文字和参考图也会删除。`)) return;
+          section.headers.splice(headerIndex, 1);
+          section.rows.forEach((row) => row.cells.splice(headerIndex, 1));
+          markDirty();
+          renderSections();
+        });
+        actions.appendChild(removeHeader);
+        field.append(label, input, actions);
         headersBox.appendChild(field);
       });
-
-      card.append(sectionHead, headersBox);
-      section.rows.forEach((row, rowIndex) => card.appendChild(createRow(section, row, sectionIndex, rowIndex)));
-
-      const addRow = document.createElement("button");
-      addRow.type = "button";
-      addRow.className = "add-row";
-      addRow.textContent = "在这一节新增一行";
-      addRow.addEventListener("click", () => {
-        const last = section.rows[section.rows.length - 1];
-        const count = last && Array.isArray(last.cells) ? last.cells.length : section.headers.length || 4;
-        section.rows.push({
-          id: `row-${Date.now()}`,
-          cells: Array.from({ length: count }, (_, index) => ({ id: `cell-${Date.now()}-${index}`, html: "", assets: [] }))
-        });
+      const addHeaderField = document.createElement("div");
+      const addHeaderButton = document.createElement("button");
+      addHeaderButton.type = "button";
+      addHeaderButton.className = "mini";
+      addHeaderButton.textContent = "＋ 新增一列";
+      addHeaderButton.addEventListener("click", () => {
+        section.headers.push("");
+        section.rows.forEach((row) => row.cells.push({ id: `cell-${Date.now()}`, html: "&nbsp;", assets: [] }));
         markDirty();
         renderSections();
       });
-      card.appendChild(addRow);
+      addHeaderField.appendChild(addHeaderButton);
+      headersBox.appendChild(addHeaderField);
+      headersEditor.append(summary, headersBox);
+
+      card.append(sectionHead, headersEditor, createSectionTable(section, sectionIndex));
+
+      const addRowButton = document.createElement("button");
+      addRowButton.type = "button";
+      addRowButton.className = "add-row";
+      addRowButton.textContent = "在这一节新增一行";
+      addRowButton.addEventListener("click", () => insertRow(section));
+      card.appendChild(addRowButton);
       wrapper.appendChild(card);
       elements.sections.appendChild(wrapper);
     });
+
+    const addSection = document.createElement("button");
+    addSection.type = "button";
+    addSection.className = "add-row";
+    addSection.textContent = "＋ 新增一节";
+    addSection.addEventListener("click", () => {
+      content.sections.push({
+        id: `section-${Date.now()}`,
+        title: "新的一节",
+        headers: ["板块", "空间/项目", "具体需求描述", "参考图", "备注 / 待确认"],
+        rows: [{
+          id: `row-${Date.now()}`,
+          cells: [
+            { id: `cell-${Date.now()}-1`, html: "&nbsp;", assets: [] },
+            { id: `cell-${Date.now()}-2`, html: "&nbsp;", assets: [] },
+            { id: `cell-${Date.now()}-3`, html: "&nbsp;", assets: [] },
+            { id: `cell-${Date.now()}-4`, html: "&nbsp;", assets: [] },
+            { id: `cell-${Date.now()}-5`, html: "&nbsp;", assets: [] }
+          ]
+        }]
+      });
+      markDirty();
+      renderSections();
+    });
+    elements.sections.appendChild(addSection);
   }
 
-  function createRow(section, row, sectionIndex, rowIndex) {
-    const card = document.createElement("div");
-    card.className = "row-card";
-    const tools = document.createElement("div");
-    tools.className = "row-tools";
+  function createSectionTable(section, sectionIndex) {
+    const wrap = document.createElement("div");
+    wrap.className = "table-wrap";
+    const table = document.createElement("table");
+    table.className = "admin-table";
+    const headers = getSectionHeaders(section);
+    const colgroup = document.createElement("colgroup");
+    const opCol = document.createElement("col");
+    opCol.className = "col-op";
+    colgroup.appendChild(opCol);
+    headers.forEach(() => colgroup.appendChild(document.createElement("col")));
+    table.appendChild(colgroup);
+
+    const thead = document.createElement("thead");
+    const headRow = document.createElement("tr");
+    const opHead = document.createElement("th");
+    opHead.textContent = "行操作";
+    headRow.appendChild(opHead);
+    headers.forEach((header, index) => {
+      const th = document.createElement("th");
+      th.textContent = header || `第 ${index + 1} 列`;
+      headRow.appendChild(th);
+    });
+    thead.appendChild(headRow);
+
+    const tbody = document.createElement("tbody");
+    section.rows.forEach((row, rowIndex) => {
+      tbody.appendChild(createTableRow(section, row, sectionIndex, rowIndex, headers));
+    });
+    if (!section.rows.length) {
+      const emptyRow = document.createElement("tr");
+      const emptyCell = document.createElement("td");
+      emptyCell.colSpan = headers.length + 1;
+      emptyCell.textContent = "这一节还没有内容，点下方“新增一行”。";
+      emptyRow.appendChild(emptyCell);
+      tbody.appendChild(emptyRow);
+    }
+    table.append(thead, tbody);
+    wrap.appendChild(table);
+    return wrap;
+  }
+
+  function createTableRow(section, row, sectionIndex, rowIndex, headers) {
+    const tr = document.createElement("tr");
+    const op = document.createElement("td");
+    op.className = "op-cell";
     const label = document.createElement("span");
+    label.className = "op-label";
     label.textContent = `第 ${rowIndex + 1} 行`;
     const buttons = document.createElement("div");
-    buttons.style.display = "flex";
-    buttons.style.gap = "5px";
+    buttons.className = "op-btns";
 
     const up = document.createElement("button");
     up.type = "button"; up.className = "mini"; up.textContent = "上移";
@@ -237,6 +431,9 @@
       section.rows.splice(rowIndex + 1, 0, section.rows.splice(rowIndex, 1)[0]);
       markDirty(); renderSections();
     });
+    const insert = document.createElement("button");
+    insert.type = "button"; insert.className = "mini"; insert.textContent = "插入行";
+    insert.addEventListener("click", () => insertRow(section, rowIndex));
     const remove = document.createElement("button");
     remove.type = "button"; remove.className = "mini danger"; remove.textContent = "删除";
     remove.addEventListener("click", () => {
@@ -244,80 +441,78 @@
       section.rows.splice(rowIndex, 1);
       markDirty(); renderSections();
     });
-    buttons.append(up, down, remove);
-    tools.append(label, buttons);
-    card.appendChild(tools);
+    buttons.append(up, down, insert, remove);
+    op.append(label, buttons);
+    tr.appendChild(op);
 
-    const cells = document.createElement("div");
-    cells.className = "cells";
-    row.cells.forEach((cell, cellIndex) => {
-      const box = document.createElement("div");
-      box.className = "cell-box";
-      const cellLabel = document.createElement("div");
-      cellLabel.className = "cell-label";
-      const name = document.createElement("span");
-      name.textContent = section.headers[cellIndex] || `第 ${cellIndex + 1} 格`;
-      cellLabel.appendChild(name);
+    headers.forEach((_, cellIndex) => {
+      if (!row.cells[cellIndex]) {
+        row.cells[cellIndex] = { id: `cell-${Date.now()}-${cellIndex}`, html: "&nbsp;", assets: [] };
+      }
+      tr.appendChild(createTableCell(section, row, sectionIndex, rowIndex, cellIndex));
+    });
+    return tr;
+  }
+
+  function createTableCell(section, row, sectionIndex, rowIndex, cellIndex) {
+    const cell = row.cells[cellIndex] || { html: "&nbsp;", assets: [] };
+    const td = document.createElement("td");
+    const textarea = document.createElement("textarea");
+    textarea.className = "cell-input";
+    textarea.value = decodeCellHtml(cell.html);
+    textarea.placeholder = "直接输入文字；粘贴链接会自动变成可点击链接。";
+    textarea.addEventListener("input", () => {
+      cell.html = encodeCellText(textarea.value);
+      markDirty();
+    });
+    td.appendChild(textarea);
+
+    const media = document.createElement("div");
+    media.className = "cell-media";
+    (cell.assets || []).forEach((asset, assetIndex) => {
+      const tile = document.createElement("div");
+      tile.className = "thumb";
+      if (pendingFiles.has(asset.src)) tile.classList.add("pending");
+      if (asset.type === "video") {
+        const video = document.createElement("video");
+        video.controls = true; video.preload = "metadata"; video.src = previewSource(asset);
+        video.setAttribute("aria-label", asset.name || "参考视频");
+        tile.appendChild(video);
+      } else {
+        const image = document.createElement("img");
+        image.loading = "lazy"; image.alt = asset.name || "参考图"; image.src = previewSource(asset);
+        tile.appendChild(image);
+      }
+      const actions = document.createElement("div");
+      actions.className = "tile-actions";
+      const replace = document.createElement("button");
+      replace.type = "button"; replace.className = "tile-btn"; replace.textContent = "换";
+      replace.addEventListener("click", () => {
+        uploadTarget = { mode: "replace", sectionIndex, rowIndex, cellIndex, assetIndex };
+        elements.fileInput.value = "";
+        elements.fileInput.click();
+      });
+      const removeAsset = document.createElement("button");
+      removeAsset.type = "button"; removeAsset.className = "tile-btn danger"; removeAsset.textContent = "×";
+      removeAsset.addEventListener("click", () => {
+        cell.assets.splice(assetIndex, 1);
+        markDirty(); renderSections();
+      });
+      actions.append(replace, removeAsset);
+      tile.appendChild(actions);
+      media.appendChild(tile);
+    });
+
       const addMedia = document.createElement("button");
-      addMedia.type = "button"; addMedia.className = "mini"; addMedia.textContent = "添加图片/视频";
+      addMedia.type = "button"; addMedia.className = "add-tile"; addMedia.textContent = "＋ 图片/视频";
       addMedia.addEventListener("click", () => {
         uploadTarget = { mode: "add", sectionIndex, rowIndex, cellIndex };
         elements.fileInput.value = "";
         elements.fileInput.click();
       });
-      cellLabel.appendChild(addMedia);
-
-      const textarea = document.createElement("textarea");
-      textarea.value = cell.html || "";
-      textarea.placeholder = "直接输入文字。换行会正常显示；也可以粘贴链接。";
-      textarea.addEventListener("input", () => {
-        cell.html = textarea.value;
-        markDirty();
-      });
-      box.append(cellLabel, textarea);
-
-      const assetGrid = document.createElement("div");
-      assetGrid.className = "asset-grid";
-      (cell.assets || []).forEach((asset, assetIndex) => {
-        const assetCard = document.createElement("div");
-        assetCard.className = "asset-card";
-        if (pendingFiles.has(asset.src)) assetCard.classList.add("pending");
-        if (asset.type === "video") {
-          const video = document.createElement("video");
-          video.className = "asset-preview"; video.controls = true; video.preload = "metadata"; video.src = previewSource(asset);
-          assetCard.appendChild(video);
-        } else {
-          const image = document.createElement("img");
-          image.className = "asset-preview"; image.loading = "lazy"; image.alt = asset.name || ""; image.src = previewSource(asset);
-          assetCard.appendChild(image);
-        }
-        const assetName = document.createElement("div");
-        assetName.className = "asset-name";
-        assetName.textContent = `${asset.type === "video" ? "视频" : "图片"} · ${asset.name || asset.src}`;
-        const actions = document.createElement("div");
-        actions.className = "asset-actions";
-        const replace = document.createElement("button");
-        replace.type = "button"; replace.className = "mini"; replace.textContent = "替换";
-        replace.addEventListener("click", () => {
-          uploadTarget = { mode: "replace", sectionIndex, rowIndex, cellIndex, assetIndex };
-          elements.fileInput.value = "";
-          elements.fileInput.click();
-        });
-        const removeAsset = document.createElement("button");
-        removeAsset.type = "button"; removeAsset.className = "mini danger"; removeAsset.textContent = "删除";
-        removeAsset.addEventListener("click", () => {
-          cell.assets.splice(assetIndex, 1);
-          markDirty(); renderSections();
-        });
-        actions.append(replace, removeAsset);
-        assetCard.append(assetName, actions);
-        assetGrid.appendChild(assetCard);
-      });
-      box.appendChild(assetGrid);
-      cells.appendChild(box);
-    });
-    card.appendChild(cells);
-    return card;
+      media.appendChild(addMedia);
+      td.appendChild(media);
+    return td;
   }
 
   function safeFilename(name) {

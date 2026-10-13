@@ -79,20 +79,28 @@
     .section-box { border-top: 2px solid #b9c7c6; padding-top: 14px; }
     .section-head { display: flex; gap: 10px; align-items: center; }
     .section-head input { font-size: 17px; font-weight: 700; }
-    .row-card { margin-top: 14px; padding: 14px; border: 1px solid #dfe5df; border-radius: 8px; background: #fafcfa; }
-    .row-tools { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; color: var(--muted); font-size: 13px; }
-    .cells { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
-    .cell-box { border: 1px solid #dbe1db; border-radius: 7px; padding: 10px; background: #fff; }
-    .cell-label { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px; color: var(--muted); font-size: 12px; }
-    .cell-box textarea { min-height: 190px; font-size: 14px; }
-    .media-tools { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
-    .asset-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin-top: 8px; }
-    .asset-card { border: 1px solid #d8dfd8; border-radius: 6px; padding: 6px; background: #fbfcfb; }
-    .asset-preview { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 4px; background: #e7eae7; display: block; }
-    video.asset-preview { object-fit: contain; background: #000; }
-    .asset-name { margin: 5px 0; color: var(--muted); font-size: 11px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-    .asset-actions { display: flex; gap: 5px; }
+    .table-wrap { overflow-x: auto; border: 1px solid #dfe5df; border-radius: 8px; background: #fff; }
+    table.admin-table { width: 100%; min-width: 860px; border-collapse: collapse; table-layout: fixed; }
+    .admin-table th, .admin-table td { border: 1px solid #e2e8e2; padding: 8px; vertical-align: top; }
+    .admin-table thead th { background: #eef4f0; color: #3c4a45; font-size: 13px; text-align: left; }
+    .admin-table col.col-op { width: 86px; }
+    .admin-table td.op-cell { background: #f7faf8; }
+    .op-label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 11px; }
+    .op-btns { display: flex; flex-direction: column; gap: 4px; }
+    .op-btns .mini { min-height: 26px; padding: 2px 4px; font-size: 11px; }
+    textarea.cell-input { min-height: 96px; font-size: 14px; }
+    .cell-media { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .thumb { position: relative; width: 86px; }
+    .thumb img, .thumb video { width: 86px; height: 62px; object-fit: cover; border-radius: 5px; background: #e7eae7; display: block; }
+    .thumb video { object-fit: contain; background: #000; }
+    .tile-actions { position: absolute; left: 3px; right: 3px; bottom: 3px; display: flex; gap: 3px; }
+    .tile-btn { flex: 1; min-height: 20px; padding: 0; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,.92); }
+    .add-tile { width: 86px; height: 62px; border: 1px dashed #9fb3ac; border-radius: 5px; background: #f6faf8; color: var(--green-dark); font-size: 12px; display: flex; align-items: center; justify-content: center; padding: 0; }
+    .add-tile:hover { background: #ecf5f1; }
     .pending { outline: 2px solid var(--amber); outline-offset: 1px; }
+    .headers-editor { margin: 8px 0 12px; }
+    .headers-editor summary { color: var(--muted); font-size: 13px; cursor: pointer; }
+    .headers-editor .form-grid { margin-top: 10px; }
     .add-row { width: 100%; margin-top: 12px; }
     .save-bar {
       position: sticky; bottom: 0; z-index: 8; margin-top: 18px; padding: 13px;
@@ -133,14 +141,15 @@
         </div>
       </div>
       <div class="onboarding">
-        <strong>编辑方法</strong>
+        <strong>怎么编辑（和公开页一样的表格）</strong>
         <ol>
-          <li>点这里 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">创建 GitHub Token</a>。</li>
-          <li>Token 页选择仓库 <code>zhenghuitian0913-create/renovation-list</code>，权限选 <strong>Contents: Read and write</strong> 和 <strong>Metadata: Read-only</strong>，生成后复制。</li>
-          <li>把 Token 粘贴到上面的 <strong>GitHub Token</strong> 输入框，点 <strong>加载内容</strong>。</li>
-          <li>下面会出现文字编辑框、图片/视频上传按钮和行管理按钮。改完点 <strong>保存并发布</strong>。</li>
+          <li>点 <strong>加载内容</strong>，下方会出现和公开页一样的表格，每个格子直接打字即可（回车就是换行）。</li>
+          <li>粘贴的网址（https://...）保存后会自动变成可以点开的链接。</li>
+          <li>参考图：点格子里的 <strong>＋ 图片/视频</strong> 添加；缩略图上的 <strong>换</strong> 和 <strong>×</strong> 分别是替换和删除。</li>
+          <li>最左边是行操作：<strong>上移 / 下移 / 插入行 / 删除</strong>；每节底部还有 <strong>新增一行</strong>。</li>
+          <li>改完点 <strong>保存并发布</strong>，公开页约 20 秒到 2 分钟自动更新。</li>
         </ol>
-        <p>Token 只保存在你自己这台设备的浏览器里。发布一般需要 20 秒到 2 分钟。</p>
+        <p>首次使用：在上方 Token 框粘贴 GitHub Token（点这里 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">创建 Token</a>，权限选 Contents: Read and write）。Token 只保存在本机浏览器。</p>
       </div>
       <div class="actions" style="margin-top:14px">
         <button id="loadButton" type="button" class="primary">加载内容</button>
@@ -173,6 +182,6 @@
   <footer>本后台仅给主人编辑使用；好友只需打开公开页。 <a href="部署说明.md" target="_blank" rel="noopener">查看部署说明</a></footer>
 
   <input type="file" id="fileInput" accept="image/*,video/*" style="display:none">
-  <script src="admin.js?v=1"></script>
+  <script src="admin.js?v=3"></script>
 </body>
 </html>
