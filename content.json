@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T04:17:10.000Z",
+  "updatedAt": "2026-10-14T05:40:30.000Z",
   "title": "旧房全屋翻新 · 装修需求清单",
-  "subtitle": "风格：中古风 | 原始户型：三房一厅一卫 | 目标：三房两厅两卫+工作间 | 含院子约30㎡",
+  "subtitle": "风格：中古风 | 原始户型：三房一厅一卫 | 目标：三房两厅两卫+工作间 | 含院子约30㎡（做生态小鱼池）",
   "sections": [
     {
       "id": "section-1",
@@ -497,20 +497,13 @@
             },
             {
               "id": "cell-0044",
-              "html": "<div class=\"cell-text\">儿童房设计规划的要能适合孩子从幼儿园到初中的阶段\n1、儿童房面积较小，采用上床下空设计：床在上面，下面做活动区，和书桌\n2、墙面想装攀爬架/攀岩墙，给孩子活动用\n3、玩具储物空间、黑板/白板写写画画\n\n备注：厨房面积太小，根据设计情况也可以和老人房做调换</div>",
+              "html": "<div class=\"cell-text\">儿童房设计规划的要能适合孩子从幼儿园到初中的阶段\n\n1、墙面想装攀爬架/攀岩墙，给孩子活动用\n2、玩具储物空间、黑板/白板写写画画\n\n备注：厨房面积太小，根据设计情况也可以和老人房做调换</div>",
               "assets": []
             },
             {
               "id": "cell-0045",
-              "html": "<div class=\"cell-text\">适我的家居住提案🧸孩子眼中的家Roomtour 👀不到15㎡... <a href=\"https://xhslink.cn/o/8IDrU5UOmaA\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/8IDrU5UOmaA</a>保留这段，去【小红书】瞧瞧笔记~\n\n9m²的儿童房做树屋，能做5大功能区❗ 空间不大的儿童... <a href=\"https://xhslink.cn/o/2IA380o2514\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/2IA380o2514</a> \n把这段话复制下来，打开【小红书】查看。\n\n7㎡树屋儿童房，住到18岁也没问题 房价这么贵，每平米... <a href=\"https://xhslink.cn/o/2RyCut59UkO\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/2RyCut59UkO</a> \n把口令拷走，打开【小红书】查看详情~\n\n9平米成长型儿童房这样做多4平，附尺寸 上一篇被很多... <a href=\"https://xhslink.cn/o/1q2TLxgd5Bf\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/1q2TLxgd5Bf</a> \n把这段复制下来，打开【小红书】就能看到精彩笔记。</div>",
-              "assets": [
-                {
-                  "id": "asset-034",
-                  "type": "image",
-                  "src": "assets/034-img-1592.jpg",
-                  "name": "IMG_1592.JPG"
-                }
-              ]
+              "html": "<div class=\"cell-text\">适我的家居住提案🧸孩子眼中的家Roomtour 👀不到15㎡... <a href=\"https://xhslink.cn/o/8IDrU5UOmaA\" target=\"_blank\" rel=\"noopener noreferrer\">https://xhslink.cn/o/8IDrU5UOmaA</a>保留这段，去【小红书】瞧瞧笔记~</div>",
+              "assets": []
             },
             {
               "id": "cell-0046",
